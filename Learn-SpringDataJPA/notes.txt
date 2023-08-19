@@ -1,0 +1,4 @@
+insert into student(id, name, course)
+values(1, 'Mukul Singh', 'Spring');
+
+select * from Student;
