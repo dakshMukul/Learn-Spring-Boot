@@ -3,7 +3,9 @@ package com.rest.webservices.restfulwebservices.user;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-
+import java.util.stream.Stream;
+import org.antlr.v4.runtime.atn.SemanticContext.Predicate;
+import org.aspectj.apache.bcel.classfile.Module.Uses;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -22,16 +24,18 @@ public class UserDaoService {
     }
 
     public User findById(int id) {
-        for (User i : users) {
-            if (i.getId() == id) {
-                return i;
-            }
-        }
-        return null;
+        java.util.function.Predicate<? super User> userPredicate = user -> user.getId() == id;
+        return users.stream().filter(userPredicate).findFirst().orElse(null);
     }
+       
 
-    public void saveUser(User user ){
+    public User saveUser(User user ){
         user.setId(++userCount);
         users.add(user);
+        return user;
+    }
+
+    public void DeleteUserById(int id){
+        users.removeIf(user -> user.getId() == id);
     }
 }
