@@ -30,16 +30,16 @@ public class UserController {
         return userDaoService.findAllUsers();
     }
 
-    @GetMapping("/users/{id}")
-    public User findUser(@PathVariable int id) {
+    // @GetMapping("/users/{id}")
+    // public User findUser(@PathVariable int id) {
 
-        User user = userDaoService.findById(id);
+    //     User user = userDaoService.findById(id);
 
-        if (user == null)
-            throw new UserNotFountException("User is not present with the ID: " + id);
+    //     if (user == null)
+    //         throw new UserNotFountException("User is not present with the ID: " + id);
 
-        return user;
-    }
+    //     return user;
+    // }
 
     @PostMapping("/users")
     public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
